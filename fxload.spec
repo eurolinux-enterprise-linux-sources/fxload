@@ -1,6 +1,6 @@
 Name: fxload
 Version: 2002_04_11
-Release: 14%{?dist}
+Release: 16%{?dist}
 Summary: A helper program to download firmware into FX and FX2 EZ-USB devices
 
 Group: System Environment/Kernel
@@ -57,6 +57,12 @@ rm -rf %{buildroot}
 %{_mandir}/*/*
 
 %changelog
+* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 2002_04_11-16
+- Mass rebuild 2014-01-24
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 2002_04_11-15
+- Mass rebuild 2013-12-27
+
 * Wed Jul 31 2013 Jaroslav Kysela <jkysela@redhat.com> - 2002_04_11-14
 - Man page and usage updates
 - rhbz#948527
