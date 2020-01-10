@@ -1,0 +1,63 @@
+diff --git a/fxload.8 b/fxload.8
+index 71dcdf4..36e63b9 100644
+--- a/fxload.8
++++ b/fxload.8
+@@ -30,6 +30,7 @@ fxload \- Firmware download to EZ-USB devices
+ .BI "[ \-v ]"
+ .BI "[ \-D " devpath " ]"
+ .BI "[ \-I " hexfile " ]"
++.BI "[ \-2 ]"
+ .BI "[ \-t " type " ]"
+ .BI "[ \-c " config " ]"
+ .BI "[ \-s " loader " ]"
+@@ -41,6 +42,7 @@ fxload \- Firmware download to EZ-USB devices
+ .br
+ .B fxload
+ .BI "[ \-V ]"
++.BI "[ \-? ]"
+ .SH "DESCRIPTION"
+ .B fxload
+ is a program which downloads firmware to USB devices based on
+@@ -116,6 +118,9 @@ are also available.
+ .B "\-V"
+ Identifies the version of fxload being invoked, and exits
+ without performing other actions.
++.TP
++.B "\-?"
++Show usage.
+ .PP
+ Note that when downloading firmware that renumerates,
+ there's no point in changing the device permissions
+@@ -155,6 +160,9 @@ As a last step when loading firmware,
+ normally overwrites this second stage loader
+ with parts of the firmware residing on-chip.
+ .TP
++.BI "\-2"
++Same as "-t fx2".
++.TP
+ .BI "\-t " type
+ Indicates which type of microcontroller is used in the device;
+ type may be one of
+diff --git a/main.c b/main.c
+index 6845cd0..4af3ade 100644
+--- a/main.c
++++ b/main.c
+@@ -163,13 +163,17 @@ int main(int argc, char*argv[])
+ usage:
+ 	    fputs ("usage: ", stderr);
+ 	    fputs (argv [0], stderr);
+-	    fputs (" [-vV] [-t type] [-D devpath]\n", stderr);
++	    fputs (" [-?] [-v] [-V] [-t type] [-2] [-D devpath]\n", stderr);
+ 	    fputs ("\t\t[-I firmware_hexfile] ", stderr);
+ 	    fputs ("[-s loader] [-c config_byte]\n", stderr);
+ 	    fputs ("\t\t[-L link] [-m mode]\n", stderr);
+ 	    fputs ("... [-D devpath] overrides DEVICE= in env\n", stderr);
+ 	    fputs ("... device types:  one of an21, fx, fx2\n", stderr);
+ 	    fputs ("... at least one of -I, -L, -m is required\n", stderr);
++	    fputs ("... -v: increase verbosity\n", stderr);
++	    fputs ("... -V: print version\n", stderr);
++	    fputs ("... -2: same as '-t fx2'\n", stderr);
++	    fputs ("... -?: this help\n", stderr);
+ 	    return -1;
+       }
+ 
